@@ -59,8 +59,13 @@ const CaseStudies: React.FC = () => {
                   src={study.image} 
                   alt={study.title} 
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+                    target.onerror = null;
+                  }}
                 />
-                <span className="absolute top-4 left-4 bg-primary-600 text-white text-sm font-medium px-3 py-1 rounded-full">
+                <span className="absolute top-4 left-4 bg-blue-600 text-white text-sm font-medium px-3 py-1 rounded-full">
                   {study.category}
                 </span>
               </div>
@@ -72,7 +77,7 @@ const CaseStudies: React.FC = () => {
                   <ul className="space-y-1">
                     {study.results.map((result, idx) => (
                       <li key={idx} className="text-gray-600 text-sm flex items-start">
-                        <span className="h-1.5 w-1.5 bg-primary-500 rounded-full mr-2 mt-1.5"></span>
+                        <span className="h-1.5 w-1.5 bg-blue-500 rounded-full mr-2 mt-1.5"></span>
                         {result}
                       </li>
                     ))}
@@ -80,7 +85,7 @@ const CaseStudies: React.FC = () => {
                 </div>
                 <a 
                   href="#" 
-                  className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
                 >
                   Xem chi tiết
                   <ArrowRight className="ml-2 h-4 w-4" />

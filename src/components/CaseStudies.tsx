@@ -4,116 +4,99 @@ import { ArrowRight } from 'lucide-react';
 const CaseStudies: React.FC = () => {
   const caseStudies = [
     {
-      company: 'VietBank',
-      industry: 'Ngân hàng',
-      logo: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80',
-      image: 'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-      challenge: 'Cần một giải pháp thông báo giao dịch nhanh chóng, an toàn và đáng tin cậy cho khách hàng.',
-      solution: 'Triển khai SMS Brandname để gửi thông báo giao dịch tức thì với tên thương hiệu ngân hàng.',
+      title: "MegaBank tăng 35% tỷ lệ thu hồi nợ với SMS Brandname",
+      category: "Ngân hàng",
+      image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      summary: "MegaBank đã triển khai SMS Brandname để gửi thông báo nhắc nợ và đạt được kết quả đáng kinh ngạc trong việc cải thiện tỷ lệ thu hồi nợ.",
       results: [
-        'Tăng 35% tỷ lệ nhận diện thương hiệu',
-        'Giảm 28% chi phí so với SMS thông thường',
-        '99.8% tin nhắn được gửi thành công',
-        'Thời gian gửi tin nhắn < 3 giây'
+        "Tăng 35% tỷ lệ thu hồi nợ",
+        "Giảm 28% chi phí thu hồi nợ",
+        "ROI đạt 320% sau 6 tháng"
       ]
     },
     {
-      company: 'ShopViet',
-      industry: 'Thương mại điện tử',
-      logo: 'https://images.unsplash.com/photo-1614332287897-cdc485fa562d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80',
-      image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-      challenge: 'Cần nâng cao tỷ lệ mở thông báo khuyến mãi và tăng tỷ lệ chuyển đổi từ các chiến dịch marketing.',
-      solution: 'Kết hợp SMS Brandname và ZNS để tạo chiến dịch marketing đa kênh với nội dung phong phú.',
+      title: "ShopViet tăng doanh số 42% nhờ chiến dịch ZNS",
+      category: "Thương mại điện tử",
+      image: "https://images.pexels.com/photos/6169/woman-hand-smartphone-desk.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      summary: "ShopViet đã sử dụng ZNS để gửi thông báo cá nhân hóa về các sản phẩm mới và khuyến mãi, giúp tăng đáng kể doanh số bán hàng.",
       results: [
-        'Tăng 42% tỷ lệ mở thông báo',
-        'Tăng 23% tỷ lệ chuyển đổi',
-        'Giảm 30% chi phí marketing',
-        'ROI tăng 2.5 lần'
+        "Tăng 42% doanh số bán hàng",
+        "Tỷ lệ mở tin nhắn đạt 92%",
+        "Giảm 40% chi phí marketing so với SMS"
       ]
     },
     {
-      company: 'HealthCare Plus',
-      industry: 'Y tế',
-      logo: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&h=100&q=80',
-      image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-      challenge: 'Cần một hệ thống nhắc lịch khám và thông báo kết quả xét nghiệm hiệu quả, đảm bảo riêng tư.',
-      solution: 'Sử dụng ZNS để gửi thông báo lịch hẹn và kết quả xét nghiệm với nội dung được mã hóa và bảo mật.',
+      title: "HealthPlus cải thiện tỷ lệ đặt lịch khám với SMS & ZNS",
+      category: "Y tế",
+      image: "https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      summary: "HealthPlus đã kết hợp SMS Brandname và ZNS để nhắc lịch khám và cung cấp thông tin sức khỏe cho bệnh nhân, giúp cải thiện đáng kể tỷ lệ đặt lịch khám.",
       results: [
-        'Giảm 45% tỷ lệ bỏ lỡ lịch hẹn',
-        'Tiết kiệm 40% chi phí nhân sự',
-        'Tăng 28% mức độ hài lòng của bệnh nhân',
-        '100% tuân thủ quy định về bảo mật dữ liệu'
+        "Giảm 45% tỷ lệ bỏ lỡ lịch hẹn",
+        "Tăng 30% tỷ lệ đặt lịch tái khám",
+        "Tiết kiệm 25% chi phí nhân sự gọi điện nhắc lịch"
       ]
     }
   ];
 
   return (
-    <section id="case-studies" className="py-16 md:py-24">
+    <section id="case-studies" className="py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Câu chuyện thành công</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Khách hàng tiêu biểu</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Khám phá cách các doanh nghiệp đã tối ưu hóa truyền thông và tăng trưởng với giải pháp của chúng tôi
+            Khám phá cách các doanh nghiệp đã đạt được kết quả kinh doanh vượt trội với giải pháp SMS Brandname và ZNS
           </p>
         </div>
 
-        <div className="space-y-16">
+        <div className="grid md:grid-cols-3 gap-8">
           {caseStudies.map((study, index) => (
             <div 
               key={index} 
-              className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center`}
+              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
             >
-              <div className="lg:w-1/2">
-                <div className="bg-gray-100 rounded-2xl overflow-hidden">
-                  <img 
-                    src={study.image} 
-                    alt={`${study.company} case study`} 
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
+              <div className="relative h-48">
+                <img 
+                  src={study.image} 
+                  alt={study.title} 
+                  className="w-full h-full object-cover"
+                />
+                <span className="absolute top-4 left-4 bg-primary-600 text-white text-sm font-medium px-3 py-1 rounded-full">
+                  {study.category}
+                </span>
               </div>
-              <div className="lg:w-1/2">
-                <div className="flex items-center mb-6">
-                  <img 
-                    src={study.logo} 
-                    alt={study.company} 
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-800">{study.company}</h3>
-                    <p className="text-gray-600">{study.industry}</p>
-                  </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">{study.title}</h3>
+                <p className="text-gray-600 mb-4">{study.summary}</p>
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-700 mb-2">Kết quả đạt được:</h4>
+                  <ul className="space-y-1">
+                    {study.results.map((result, idx) => (
+                      <li key={idx} className="text-gray-600 text-sm flex items-start">
+                        <span className="h-1.5 w-1.5 bg-primary-500 rounded-full mr-2 mt-1.5"></span>
+                        {result}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                
-                <div className="space-y-4 mb-6">
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Thách thức:</h4>
-                    <p className="text-gray-700">{study.challenge}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Giải pháp:</h4>
-                    <p className="text-gray-700">{study.solution}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">Kết quả:</h4>
-                    <ul className="mt-2 space-y-2">
-                      {study.results.map((result, i) => (
-                        <li key={i} className="flex items-center">
-                          <span className="h-2 w-2 bg-primary-600 rounded-full mr-2"></span>
-                          <span className="text-gray-700">{result}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                
-                <button className="flex items-center text-primary-600 font-medium hover:text-primary-700 transition-colors">
+                <a 
+                  href="#" 
+                  className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+                >
                   Xem chi tiết
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </button>
+                </a>
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <a 
+            href="/case-studies" 
+            className="inline-block bg-white border border-gray-300 hover:border-gray-400 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors"
+          >
+            Xem tất cả case studies
+          </a>
         </div>
       </div>
     </section>

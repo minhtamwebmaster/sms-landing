@@ -23,7 +23,7 @@ const Header: React.FC = () => {
           <Link to="/#services" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Dịch vụ</Link>
           <Link to="/#pricing" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Bảng giá</Link>
           <Link to="/news" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Tin tức</Link>
-          <Link to="/#contact" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Liên hệ</Link>
+          <Link to="/contact" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Liên hệ</Link>
         </nav>
 
         <button className="hidden md:block bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
             <Link to="/#services" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Dịch vụ</Link>
             <Link to="/#pricing" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Bảng giá</Link>
             <Link to="/news" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Tin tức</Link>
-            <Link to="/#contact" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Liên hệ</Link>
+            <Link to="/contact" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Liên hệ</Link>
             <button className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors w-full">
               Đăng ký dùng thử
             </button>

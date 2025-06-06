@@ -23,10 +23,17 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Parse multiple emails from environment variables
+    const contactEmails = process.env.CONTACT_EMAIL?.split(',').map(email => email.trim()) || [process.env.EMAIL_USER];
+    const ccEmails = process.env.EMAIL_CC?.split(',').map(email => email.trim()).filter(Boolean) || [];
+    const bccEmails = process.env.EMAIL_BCC?.split(',').map(email => email.trim()).filter(Boolean) || [];
+
     // Email content
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.CONTACT_EMAIL || process.env.EMAIL_USER, // Email nhận
+      to: contactEmails, // Email chính
+      cc: ccEmails.length > 0 ? ccEmails : undefined, // CC emails
+      bcc: bccEmails.length > 0 ? bccEmails : undefined, // BCC emails
       subject: `[SMS Brandname] Yêu cầu liên hệ từ ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

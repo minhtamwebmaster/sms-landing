@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Calendar, User, Tag, ChevronRight, Clock, ArrowRight, Facebook, Twitter, Linkedin, Instagram, Mail, Filter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -8,6 +9,8 @@ const News: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6;
 
   // Categories
   const categories = [
@@ -18,8 +21,8 @@ const News: React.FC = () => {
     "Case studies"
   ];
 
-  // Blog post data
-  const blogPosts = [
+  // All blog posts data (12 posts total)
+  const allBlogPosts = [
     {
       id: 1,
       title: "Cập nhật tính năng mới: Phân tích hiệu quả chiến dịch SMS theo thời gian thực",
@@ -103,33 +106,107 @@ const News: React.FC = () => {
       readTime: "9 phút đọc",
       featured: false,
       views: 1432
+    },
+    {
+      id: 8,
+      title: "Tối ưu hóa thời gian gửi SMS: Nghiên cứu về Golden Hours trong SMS Marketing",
+      excerpt: "Phân tích dữ liệu từ hơn 10 triệu tin nhắn để tìm ra khung giờ vàng có tỷ lệ mở và tương tác cao nhất trong SMS Marketing.",
+      image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      category: "Xu hướng thị trường",
+      author: "Nguyễn Minh Đức",
+      date: "10/03/2023",
+      readTime: "7 phút đọc",
+      featured: false,
+      views: 1876
+    },
+    {
+      id: 9,
+      title: "Compliance và quy định pháp lý cho SMS Marketing tại Việt Nam 2024",
+      excerpt: "Hướng dẫn đầy đủ về các quy định pháp lý, compliance và best practices để đảm bảo chiến dịch SMS Marketing tuân thủ luật pháp Việt Nam.",
+      image: "https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      category: "Hướng dẫn sử dụng",
+      author: "Luật sư Trần Thị Lan",
+      date: "25/02/2023",
+      readTime: "12 phút đọc",
+      featured: false,
+      views: 2341
+    },
+    {
+      id: 10,
+      title: "Tích hợp AI và Machine Learning vào SMS Marketing: Tương lai đã đến",
+      excerpt: "Khám phá cách AI và ML đang cách mạng hóa SMS Marketing với personalization thông minh, dự đoán hành vi khách hàng và tối ưu hóa tự động.",
+      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      category: "Xu hướng thị trường",
+      author: "Dr. Nguyễn Văn AI",
+      date: "18/02/2023",
+      readTime: "10 phút đọc",
+      featured: false,
+      views: 3245
+    },
+    {
+      id: 11,
+      title: "SMS Marketing cho ngành Y tế: Cơ hội và thách thức trong chăm sóc sức khỏe",
+      excerpt: "Phân tích ứng dụng SMS Marketing trong ngành y tế, từ nhắc nhở khám bệnh đến chăm sóc bệnh nhân, cùng các quy định đặc biệt cần tuân thủ.",
+      image: "https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      category: "Case studies",
+      author: "BS. Nguyễn Thị Hạnh",
+      date: "10/02/2023",
+      readTime: "11 phút đọc",
+      featured: false,
+      views: 1987
+    },
+    {
+      id: 12,
+      title: "ROI Calculator: Cách tính toán hiệu quả đầu tư SMS Marketing",
+      excerpt: "Hướng dẫn chi tiết cách tính toán ROI cho chiến dịch SMS Marketing, bao gồm các metrics quan trọng và công cụ đo lường hiệu quả.",
+      image: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      category: "Hướng dẫn sử dụng",
+      author: "Nguyễn Văn Tài",
+      date: "05/02/2023",
+      readTime: "9 phút đọc",
+      featured: false,
+      views: 2156
     }
   ];
 
   // Filter posts based on search query and selected category
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+  const filteredPosts = allBlogPosts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    const matchesCategory = selectedCategory === null || 
-                           selectedCategory === "Tất cả" || 
+
+    const matchesCategory = selectedCategory === null ||
+                           selectedCategory === "Tất cả" ||
                            post.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
+  // Separate featured and non-featured posts
+  const nonFeaturedPosts = filteredPosts.filter(post => !post.featured);
+
+  // Pagination logic for non-featured posts
+  const totalPages = Math.ceil(nonFeaturedPosts.length / postsPerPage);
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const currentPosts = nonFeaturedPosts.slice(startIndex, endIndex);
+
   // Get featured post
-  const featuredPost = blogPosts.find(post => post.featured);
+  const featuredPost = allBlogPosts.find(post => post.featured);
 
   // Get most popular posts (based on views)
-  const popularPosts = [...blogPosts].sort((a, b) => b.views - a.views).slice(0, 3);
+  const popularPosts = [...allBlogPosts].sort((a, b) => b.views - a.views).slice(0, 3);
 
   // Get recent posts
-  const recentPosts = [...blogPosts].sort((a, b) => {
+  const recentPosts = [...allBlogPosts].sort((a, b) => {
     const dateA = a.date.split('/').reverse().join('');
     const dateB = b.date.split('/').reverse().join('');
     return dateB.localeCompare(dateA);
   }).slice(0, 3);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -239,20 +316,20 @@ const News: React.FC = () => {
                     <p className="text-gray-600 mb-4">
                       {featuredPost.excerpt}
                     </p>
-                    <a 
-                      href={`/news/${featuredPost.id}`}
+                    <Link
+                      to={`/news/${featuredPost.id}`}
                       className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
                     >
                       Đọc tiếp
                       <ArrowRight className="ml-2 h-4 w-4" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )}
 
               {/* Post Grid */}
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                {filteredPosts.filter(post => !post.featured).map((post) => (
+                {currentPosts.map((post) => (
                   <div key={post.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="relative h-48">
                       <img 
@@ -290,13 +367,13 @@ const News: React.FC = () => {
                           </div>
                           <span className="text-sm text-gray-600 ml-2">{post.author}</span>
                         </div>
-                        <a 
-                          href={`/news/${post.id}`}
+                        <Link
+                          to={`/news/${post.id}`}
                           className="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center"
                         >
                           Đọc tiếp
                           <ChevronRight className="ml-1 h-4 w-4" />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -304,25 +381,49 @@ const News: React.FC = () => {
               </div>
 
               {/* Pagination */}
-              <div className="flex justify-center mt-8">
-                <nav className="inline-flex rounded-md shadow">
-                  <a href="#" className="py-2 px-4 border border-gray-300 bg-white rounded-l-md hover:bg-gray-50">
-                    Trước
-                  </a>
-                  <a href="#" className="py-2 px-4 border-t border-b border-gray-300 bg-primary-600 text-white">
-                    1
-                  </a>
-                  <a href="#" className="py-2 px-4 border-t border-b border-gray-300 bg-white hover:bg-gray-50">
-                    2
-                  </a>
-                  <a href="#" className="py-2 px-4 border-t border-b border-gray-300 bg-white hover:bg-gray-50">
-                    3
-                  </a>
-                  <a href="#" className="py-2 px-4 border border-gray-300 bg-white rounded-r-md hover:bg-gray-50">
-                    Tiếp
-                  </a>
-                </nav>
-              </div>
+              {totalPages > 1 && (
+                <div className="flex justify-center mt-8">
+                  <nav className="inline-flex rounded-md shadow">
+                    <button
+                      onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                      disabled={currentPage === 1}
+                      className={`py-2 px-4 border border-gray-300 rounded-l-md ${
+                        currentPage === 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-white hover:bg-gray-50'
+                      }`}
+                    >
+                      Trước
+                    </button>
+
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`py-2 px-4 border-t border-b border-gray-300 ${
+                          currentPage === page
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-white hover:bg-gray-50'
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+
+                    <button
+                      onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                      disabled={currentPage === totalPages}
+                      className={`py-2 px-4 border border-gray-300 rounded-r-md ${
+                        currentPage === totalPages
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-white hover:bg-gray-50'
+                      }`}
+                    >
+                      Tiếp
+                    </button>
+                  </nav>
+                </div>
+              )}
             </div>
 
             {/* Sidebar */}
@@ -376,7 +477,7 @@ const News: React.FC = () => {
                       >
                         <span className="text-gray-700">{category}</span>
                         <span className="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                          {blogPosts.filter(post => post.category === category).length}
+                          {allBlogPosts.filter(post => post.category === category).length}
                         </span>
                       </a>
                     </li>
@@ -399,9 +500,9 @@ const News: React.FC = () => {
                       </div>
                       <div>
                         <h4 className="font-medium text-gray-800 mb-1 line-clamp-2">
-                          <a href={`/news/${post.id}`} className="hover:text-primary-600">
+                          <Link to={`/news/${post.id}`} className="hover:text-primary-600">
                             {post.title}
-                          </a>
+                          </Link>
                         </h4>
                         <div className="flex items-center text-xs text-gray-500">
                           <Calendar className="h-3 w-3 mr-1" />
@@ -428,9 +529,9 @@ const News: React.FC = () => {
                       </div>
                       <div>
                         <h4 className="font-medium text-gray-800 mb-1 line-clamp-2">
-                          <a href={`/news/${post.id}`} className="hover:text-primary-600">
+                          <Link to={`/news/${post.id}`} className="hover:text-primary-600">
                             {post.title}
-                          </a>
+                          </Link>
                         </h4>
                         <div className="flex items-center text-xs text-gray-500">
                           <Calendar className="h-3 w-3 mr-1" />

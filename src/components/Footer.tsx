@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram, MessageSquare } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -8,7 +8,10 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-white text-lg font-bold mb-4">VietMessage Solutions</h3>
+            <div className="flex items-center mb-4">
+              <MessageSquare className="h-8 w-8 text-primary-400 mr-2" />
+              <span className="text-xl font-bold text-white">SMS<span className="text-primary-400">Brand</span></span>
+            </div>
             <p className="mb-6">
               Giải pháp truyền thông SMS Brandname và ZNS chuyên nghiệp cho doanh nghiệp Việt Nam.
             </p>

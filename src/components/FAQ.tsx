@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const FAQ: React.FC = () => {
+interface FAQProps {
+  onOpenContactModal?: () => void;
+}
+
+const FAQ: React.FC<FAQProps> = ({ onOpenContactModal }) => {
   const faqs = [
     {
       question: "SMS Brandname là gì?",
@@ -82,12 +86,12 @@ const FAQ: React.FC = () => {
 
         <div className="mt-12 text-center">
           <p className="text-gray-700 mb-4">Không tìm thấy câu trả lời bạn đang tìm kiếm?</p>
-          <a 
-            href="#contact" 
+          <button
+            onClick={onOpenContactModal}
             className="inline-block bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
           >
             Liên hệ với chúng tôi
-          </a>
+          </button>
         </div>
       </div>
     </section>

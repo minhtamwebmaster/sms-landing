@@ -1,7 +1,11 @@
 import React from 'react';
 import { TrendingUp, Shield, Clock, BarChart4, Zap, Users } from 'lucide-react';
 
-const Benefits: React.FC = () => {
+interface BenefitsProps {
+  onOpenTrialModal?: () => void;
+}
+
+const Benefits: React.FC<BenefitsProps> = ({ onOpenTrialModal }) => {
   const benefits = [
     {
       icon: <TrendingUp className="h-8 w-8 text-primary-600" />,
@@ -58,7 +62,10 @@ const Benefits: React.FC = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <button className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg transition-colors">
+          <button
+            onClick={onOpenTrialModal}
+            className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-8 rounded-lg transition-colors"
+          >
             Bắt đầu ngay hôm nay
           </button>
         </div>

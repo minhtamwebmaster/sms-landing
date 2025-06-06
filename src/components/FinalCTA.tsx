@@ -1,7 +1,11 @@
 import React from 'react';
 import { ArrowRight, MessageSquare, Bell } from 'lucide-react';
 
-const FinalCTA: React.FC = () => {
+interface FinalCTAProps {
+  onOpenTrialModal?: () => void;
+}
+
+const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenTrialModal }) => {
   return (
     <section id="final-cta" className="py-16 md:py-24 bg-primary-600 text-white">
       <div className="container mx-auto px-4">
@@ -12,13 +16,13 @@ const FinalCTA: React.FC = () => {
           </p>
           
           <div className="flex flex-col md:flex-row justify-center gap-4 mb-12">
-            <a 
-              href="#contact" 
+            <button
+              onClick={onOpenTrialModal}
               className="flex items-center justify-center bg-white text-primary-600 hover:bg-primary-50 font-medium py-3 px-6 rounded-lg transition-colors"
             >
               Đăng ký dùng thử miễn phí
               <ArrowRight className="ml-2 h-5 w-5" />
-            </a>
+            </button>
             <a 
               href="#demo" 
               className="flex items-center justify-center bg-primary-700 hover:bg-primary-800 text-white font-medium py-3 px-6 rounded-lg transition-colors"

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { MessageSquare, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { scrollToSection } from '../utils/scrollUtils';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onOpenTrialModal?: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onOpenTrialModal }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -20,13 +25,26 @@ const Header: React.FC = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Trang chủ</Link>
-          <Link to="/#services" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Dịch vụ</Link>
-          <Link to="/#pricing" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Bảng giá</Link>
+          <button
+            onClick={() => scrollToSection('services')}
+            className="text-gray-800 font-medium hover:text-primary-600 transition-colors"
+          >
+            Dịch vụ
+          </button>
+          <button
+            onClick={() => scrollToSection('pricing')}
+            className="text-gray-800 font-medium hover:text-primary-600 transition-colors"
+          >
+            Bảng giá
+          </button>
           <Link to="/news" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Tin tức</Link>
           <Link to="/contact" className="text-gray-800 font-medium hover:text-primary-600 transition-colors">Liên hệ</Link>
         </nav>
 
-        <button className="hidden md:block bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+        <button
+          onClick={onOpenTrialModal}
+          className="hidden md:block bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+        >
           Đăng ký dùng thử
         </button>
 
@@ -44,11 +62,30 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-white border-t border-gray-100">
           <div className="container mx-auto px-4 py-3 flex flex-col space-y-3">
             <Link to="/" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Trang chủ</Link>
-            <Link to="/#services" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Dịch vụ</Link>
-            <Link to="/#pricing" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Bảng giá</Link>
+            <button
+              onClick={() => {
+                scrollToSection('services');
+                setIsMenuOpen(false);
+              }}
+              className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors text-left"
+            >
+              Dịch vụ
+            </button>
+            <button
+              onClick={() => {
+                scrollToSection('pricing');
+                setIsMenuOpen(false);
+              }}
+              className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors text-left"
+            >
+              Bảng giá
+            </button>
             <Link to="/news" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Tin tức</Link>
             <Link to="/contact" className="text-gray-800 font-medium py-2 hover:text-primary-600 transition-colors">Liên hệ</Link>
-            <button className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors w-full">
+            <button
+              onClick={onOpenTrialModal}
+              className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors w-full"
+            >
               Đăng ký dùng thử
             </button>
           </div>

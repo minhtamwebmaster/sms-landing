@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Check, HelpCircle } from 'lucide-react';
 
-const Pricing: React.FC = () => {
+interface PricingProps {
+  onOpenContactModal?: () => void;
+}
+
+const Pricing: React.FC<PricingProps> = ({ onOpenContactModal }) => {
   const smsBrandnameServices = [
     {
       name: "SMS BRANDNAME CSKH",
@@ -16,7 +20,7 @@ const Pricing: React.FC = () => {
         "Thanh toán trả sau mỗi tháng"
       ],
       cta: "Liên hệ ngay",
-      popular: false,
+      popular: true,
       color: "blue"
     },
     {
@@ -32,7 +36,7 @@ const Pricing: React.FC = () => {
         "Thanh toán trả sau mỗi tháng"
       ],
       cta: "Liên hệ ngay",
-      popular: true,
+      popular: false,
       color: "blue"
     }
   ];
@@ -188,10 +192,11 @@ const Pricing: React.FC = () => {
                     ))}
                   </ul>
                   
-                  <button 
+                  <button
+                    onClick={onOpenContactModal}
                     className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
-                      plan.popular 
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                      plan.popular
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
                         : 'bg-blue-100 hover:bg-blue-200 text-blue-700'
                     }`}
                   >
@@ -240,10 +245,11 @@ const Pricing: React.FC = () => {
                       ))}
                     </ul>
                     
-                    <button 
+                    <button
+                      onClick={onOpenContactModal}
                       className={`w-full py-2.5 px-4 rounded-lg font-medium transition-colors ${
-                        plan.popular 
-                          ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                        plan.popular
+                          ? 'bg-blue-600 hover:bg-blue-700 text-white'
                           : 'bg-blue-100 hover:bg-blue-200 text-blue-700'
                       }`}
                     >
@@ -284,12 +290,12 @@ const Pricing: React.FC = () => {
         
         <div className="mt-16 text-center">
           <p className="text-gray-600 mb-4">Cần giải pháp tùy chỉnh cho doanh nghiệp của bạn?</p>
-          <a 
-            href="#contact" 
+          <button
+            onClick={onOpenContactModal}
             className="inline-block bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-6 rounded-lg transition-colors"
           >
             Liên hệ đội ngũ kinh doanh
-          </a>
+          </button>
         </div>
       </div>
     </section>

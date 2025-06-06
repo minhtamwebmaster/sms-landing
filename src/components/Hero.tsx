@@ -1,7 +1,11 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onOpenTrialModal?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onOpenTrialModal }) => {
   return (
     <section className="bg-gradient-to-r from-primary-600 to-primary-700 text-white py-16 md:py-24">
       <div className="container mx-auto px-4">
@@ -14,8 +18,11 @@ const Hero: React.FC = () => {
               Giải pháp truyền thông hiệu quả, chuyên nghiệp giúp doanh nghiệp kết nối với khách hàng mọi lúc, mọi nơi.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-white text-primary-700 hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center">
-                Đăng ký dùng thử 
+              <button
+                onClick={onOpenTrialModal}
+                className="bg-white text-primary-700 hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
+              >
+                Đăng ký dùng thử
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
               <button className="bg-transparent border border-white text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-lg transition-colors">
